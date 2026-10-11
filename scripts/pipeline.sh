@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Builds the spotifyglass tweak and injects it (plus FLEX) into a decrypted Spotify IPA.
+# Builds the dxify tweak (internally still spotifyglass, spoti.pw's working name) and injects it
+# (plus FLEX) into a decrypted Spotify IPA.
 #
 #   scripts/pipeline.sh <decrypted.ipa> [-o out.ipa] [--no-flex] [--install] [--name N] [--icon P.png]   (or: make build / make install)
 #
@@ -32,7 +33,7 @@ while [ $# -gt 0 ]; do
     --icon) ICON="$2"; shift 2 ;;
     --no-flex) WITH_FLEX=0; shift ;;
     --install) INSTALL=1; shift ;;
-    -h|--help) sed -n '2,11p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,12p' "$0"; exit 0 ;;
     *) IN="$1"; shift ;;
   esac
 done
@@ -63,8 +64,8 @@ rm -f "$ROOT/out/.info.plist"
 # a fork left behind by a release is named for the version it really is.
 MOD_VERSION="$(cat "$ROOT/version.txt" 2>/dev/null || true)"
 : "${MOD_VERSION:=0.0.0}"
-OUT="${OUT:-$ROOT/out/spoti.pw-$MOD_VERSION.ipa}"
-echo "==> spoti.pw $MOD_VERSION on Spotify $SPOTIFY_VERSION -> $OUT"
+OUT="${OUT:-$ROOT/out/dxify-$MOD_VERSION.ipa}"
+echo "==> dxify $MOD_VERSION on Spotify $SPOTIFY_VERSION -> $OUT"
 
 # The flag table is generated rather than committed, so it always matches the IPA being built.
 if [ ! -f "$ROOT/tweak/Sources/Shared/Flags/SGFlagList.m" ]; then

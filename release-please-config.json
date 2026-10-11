@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
-  "bootstrap-sha": "640f800e09d4be2f9a95102edec8f829416da6ac",
+  "bootstrap-sha": "a08b38b9e293f0893e92ff7a9b7b9d92f903431a",
   "packages": {
     ".": {
       "release-type": "simple",
-      "package-name": "spoti.pw",
+      "package-name": "dxify",
       "include-component-in-tag": false,
       "bump-minor-pre-major": true,
       "changelog-sections": [

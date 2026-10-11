@@ -1,5 +1,9 @@
 # Changelog
 
+dxify's own releases start at 1.0.0 and are listed first. Everything from 0.21.1 down is
+[spoti.pw](https://github.com/skopevoj/spoti.pw)'s history by Vojtěch Škopek and its contributors, the
+work dxify is built on, kept as it was released.
+
 ## [0.21.1](https://github.com/skopevoj/spoti.pw/compare/v0.21.0...v0.21.1) (2026-09-21)
 
 

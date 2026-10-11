@@ -48,8 +48,8 @@ UIViewController *SGAboutPage(void) {
             SGStatRow(@"Spotify", ^NSString *{ return spotify; }),
         ]),
         SGSection(nil, @[
-            withSymbol(SGLinkRow(@"Website", nil, SGSiteURL), @"safari"),
-            withSymbol(SGLinkRow(@"GitHub", nil, SGRepoURL), @"chevron.left.forwardslash.chevron.right"),
+            withSymbol(SGLinkRow(@"Built on spoti.pw", @"By Vojtěch Škopek, with thanks", SGSiteURL), @"heart"),
+            withSymbol(SGLinkRow(@"GitHub", @"Source code, GPL-3.0", SGRepoURL), @"chevron.left.forwardslash.chevron.right"),
             withSymbol(SGActionRow(@"Welcome tour", nil, ^{ SGShowOnboarding(); }), @"map"),
         ]),
         SGSection(nil, @[

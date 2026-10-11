@@ -205,8 +205,9 @@ UIViewController *SGTopController(void) {
     return top;
 }
 
+// spoti.pw is the project dxify is built on; its site is the credit on the Mod page.
 NSString *const SGSiteURL = @"https://spoti.pw";
-NSString *const SGRepoURL = @"https://github.com/skopevoj/spoti.pw";
+NSString *const SGRepoURL = @"https://github.com/dx1ctrl/dxify";
 
 void SGOpenURL(NSString *url) {
     NSURL *target = url ? [NSURL URLWithString:url] : nil;

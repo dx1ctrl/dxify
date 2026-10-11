@@ -1,5 +1,6 @@
-// Donate: Ko-fi, asked for from the Mod Settings row, a sheet after the first welcome tour (after its
-// restart when the look changed), then two days on and every fourteen after that.
+// Donate: the Ko-fi of spoti.pw's creator, whose work dxify is built on, asked for from the Mod
+// Settings row, a sheet after the first welcome tour (after its restart when the look changed), then
+// two days on and every fourteen after that.
 #import <UIKit/UIKit.h>
 #import "Settings/SGModPage.h"
 

@@ -1,7 +1,10 @@
-Package: com.spotipw
-Name: spoti.pw
+Package: com.dx1ctrl.dxify
+Name: dxify
 Architecture: iphoneos-arm
-Description: Liquid Glass for the Spotify iOS app
-Maintainer: spoti.pw
-Author: spoti.pw
+Description: Liquid Glass for the Spotify iOS app, built on spoti.pw
+Maintainer: dx1ctrl
+Author: dx1ctrl, built on spoti.pw by Vojtěch Škopek
+Homepage: https://github.com/dx1ctrl/dxify
 Section: Tweaks
+Conflicts: com.spotipw
+Replaces: com.spotipw
