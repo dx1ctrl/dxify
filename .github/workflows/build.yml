@@ -1,0 +1,43 @@
+# Builds the tweak's .deb on every push and pull request, so a change that does not compile is caught
+# before a release, not after. No IPA is needed: the flag table comes from the SG_FLAG_LIST secret when
+# the repo has one (see release.yml), and is an empty stub otherwise, which compiles the same code.
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tweak:
+    runs-on: macos-latest
+    env:
+      THEOS: ${{ github.workspace }}/theos
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - uses: actions/checkout@v5
+        with:
+          repository: theos/theos
+          path: theos
+          submodules: recursive
+
+      - name: Install tools
+        run: brew install make dpkg ldid
+
+      - name: Flag table
+        env:
+          SG_FLAG_LIST: ${{ secrets.SG_FLAG_LIST }}
+        run: |
+          if [ -n "$SG_FLAG_LIST" ]; then
+            echo "$SG_FLAG_LIST" | base64 -d | gunzip > tweak/Sources/Shared/Flags/SGFlagList.m
+          else
+            printf '#import "Flags.h"\nconst SGFlagDef SGFlagTable[] = {{"", SGFlagUnknown, 0, 0, 0}};\nconst NSUInteger SGFlagCount = 0;\n' \
+              > tweak/Sources/Shared/Flags/SGFlagList.m
+          fi
+
+      - name: Build
+        run: env -u MAKELEVEL gmake -C tweak clean package
