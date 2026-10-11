@@ -175,7 +175,8 @@ static NSArray<NSDictionary *> *releasesFrom(NSData *data) {
     [entries sortUsingComparator:^NSComparisonResult(NSDictionary *a, NSDictionary *b) {
         return isNewer(a[@"version"], b[@"version"]) ? NSOrderedAscending : NSOrderedDescending;
     }];
-    return entries.count ? entries : nil;
+    // Empty is an answer too: a repo with no release yet has nothing newer than this build.
+    return entries;
 }
 
 static void ask(NSString *url, void (^done)(NSArray<NSDictionary *> *releases, NSInteger status, NSError *error)) {
