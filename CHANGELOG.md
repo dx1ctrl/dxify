@@ -4,6 +4,26 @@ dxify's own releases start at 1.0.0 and are listed first. Everything from 0.21.1
 [spoti.pw](https://github.com/skopevoj/spoti.pw)'s history by Vojtěch Škopek and its contributors, the
 work dxify is built on, kept as it was released.
 
+## [1.0.0](https://github.com/dx1ctrl/dxify/compare/v0.21.1...v1.0.0) (2026-10-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Spoof Premium, Hide ads and Hide upsells are gone.
+
+### Features
+
+* a Privacy page replaces Premium, ads & privacy, and Spotify's ads, upsells and Premium are left alone ([3b80b5c](https://github.com/dx1ctrl/dxify/commit/3b80b5c316eeb8083e1030417e99228bee190818))
+* dxify, a fork of spoti.pw 0.21.1 under its own name, crediting spoti.pw throughout ([49d121c](https://github.com/dx1ctrl/dxify/commit/49d121c8215ac81e12879bef38c4b0510fd28faf))
+
+
+### Fixes
+
+* a repo with no release yet reads as up to date, not as a failed check ([32ea71f](https://github.com/dx1ctrl/dxify/commit/32ea71fd50af58855d120e91a29fe4a58d0ca937))
+* no lyrics source is sent your Spotify token, so Spicy Lyrics is no longer one ([5ba743f](https://github.com/dx1ctrl/dxify/commit/5ba743fd54cab3a7e4f3fc0b6a958fc69953b7bf))
+* the update check only reads dxify's GitHub releases and reports nothing about the install ([e6463f5](https://github.com/dx1ctrl/dxify/commit/e6463f5bc73a39fccd20f985f24d92cf60326a54))
+* the update notice is offered once per release again, not on every launch ([e7b4780](https://github.com/dx1ctrl/dxify/commit/e7b47808c0e9e6a459e2976d4b43b33c78108e18))
+
 ## [0.21.1](https://github.com/skopevoj/spoti.pw/compare/v0.21.0...v0.21.1) (2026-09-21)
 
 
