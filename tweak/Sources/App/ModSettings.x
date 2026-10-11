@@ -1,9 +1,9 @@
 // Settings: a Mod Settings row at the end of Spotify's settings list opens the mod's own page: the
 // Appearance card with Redesigned UI, then a page per part of Spotify, each holding what that part
 // offers in the stored look (App/Pages.m: Navbar, Player, and Home & Library for the native look), Audio
-// effects (JamesDSP, Shared/JamesDSP, in either look and applying straight away), Premium, ads & privacy
-// and Labs, All flags, a searchable list of every flag with an override per flag, and Mod, the
-// build, its updates and links. The same row leads the side drawer's list (trees/test6.txt), above
+// effects (JamesDSP, Shared/JamesDSP, in either look and applying straight away), Privacy and Labs,
+// All flags, a searchable list of every flag with an override per flag, and Mod, the build, its
+// updates and links. The same row leads the side drawer's list (trees/test6.txt), above
 // Your plan, so the page is a tap from Home, and holding Home on the tab bar opens it too. The tweaks read the switches when they run, so a change
 // shows after Spotify restarts; the tab editor on the Navbar page applies as soon as the bar lays
 // out again.
@@ -17,10 +17,10 @@
 #import "Settings/SGPageStyle.h"
 #import "Settings/SGModPage.h"
 #import "Native/Home/Home.h"
-#import "Shared/AdBlock/AdBlock.h"
 #import "Shared/Flags/Flags.h"
 #import "Shared/JamesDSP/JamesDSPPage.h"
 #import "Shared/LiveActivity/LiveActivity.h"
+#import "Shared/Privacy/Privacy.h"
 #import "App/About/About.h"
 #import "App/Donate/Donate.h"
 #import "Pages.h"
@@ -63,7 +63,7 @@ static UIViewController *modSettingsPage(void) {
         SGAppearanceSection(),
         SGSection(nil, parts),
         SGSection(nil, @[
-            pageRow(@"Premium, ads & privacy", @"crown", ^UIViewController *{ return SGAdsSettingsPage(); }),
+            pageRow(@"Privacy", @"hand.raised", ^UIViewController *{ return SGPrivacySettingsPage(); }),
             pageRow(@"Labs", @"testtube.2", ^UIViewController *{ return SGLabsPage(); }),
         ]),
         SGSection(nil, @[
