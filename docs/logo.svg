@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="dxify">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#15161a"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <radialGradient id="lime" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#37f200" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#37f200" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="teal" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00c2ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#00c2ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.75"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.04"/>
+    </linearGradient>
+    <clipPath id="squircle">
+      <rect width="512" height="512" rx="114"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#squircle)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <circle cx="150" cy="390" r="230" fill="url(#lime)"/>
+    <circle cx="410" cy="110" r="210" fill="url(#teal)"/>
+    <circle cx="256" cy="256" r="164" fill="url(#pane)" stroke="url(#rim)" stroke-width="5"/>
+    <path d="M150 168 A124 124 0 0 1 252 120" fill="none" stroke="#fff" stroke-opacity="0.55" stroke-width="7" stroke-linecap="round"/>
+    <g fill="none" stroke-linecap="round" stroke-width="30">
+      <circle cx="206" cy="282" r="48" stroke="#fff"/>
+      <line x1="254" y1="172" x2="254" y2="330" stroke="#fff"/>
+      <line x1="296" y1="236" x2="358" y2="330" stroke="#37f200"/>
+      <line x1="358" y1="236" x2="296" y2="330" stroke="#37f200"/>
+    </g>
+  </g>
+</svg>
