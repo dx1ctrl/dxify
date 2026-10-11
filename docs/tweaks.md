@@ -266,9 +266,9 @@ changes; the row reads out Off, On or how many effects are on. Home & Library, i
 the Gradient page (the wash behind the top of Home in one of eight colours, at three strengths and
 four heights) and the Home flags, the parts of Home to hide including the DJ button and badge, the
 playlist header, buttons and pills to hide, and the Library flags. Then Privacy (Block telemetry,
-hiding the video carousel and social proof in Search, a Tips page whose switches each force a flag
-Spotify ships on to off, then what the telemetry blocking has stopped) and Labs (features Spotify built and did not ship,
-AI Chat (Martini) first). Last, All flags, Spotify's remote-config flags with a search field and an
+hiding the video carousel and social proof in Search, a Tips page with the flags behind Spotify's tips
+and nudges, then what the telemetry blocking has stopped) and Labs (features Spotify built and did
+not ship, AI Chat (Martini) first). Last, All flags, Spotify's remote-config flags with a search field and an
 Auto / Off / On control per flag (a text field for the number and text ones), and Mod: Updates
 (the row reads out where the build stands and opens the changelog of everything newer than it, read
 from the releases Release Please cuts, with Check now, the release to get, all the releases and Tell
