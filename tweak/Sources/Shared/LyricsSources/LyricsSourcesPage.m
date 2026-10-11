@@ -42,8 +42,7 @@ typedef NS_ENUM(NSInteger, SGSourcesSection) {
     [self read];
     self.tableView.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
-    _footer = SGNote(@"Asked top to bottom until one has word timing. Spicy Lyrics is sent your Spotify "
-                      "access token; the others get only the track, never your account.");
+    _footer = SGNote(@"Asked top to bottom until one has word timing. Each gets only the track, never your account.");
     self.tableView.tableFooterView = _footer;
 }
 
