@@ -62,6 +62,7 @@ static void installBundled(SGDSPFileKind kind, NSString *directory) {
 NSString *SGDSPLibraryDirectory(SGDSPFileKind kind) {
     static os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
     NSString *documents = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+    // spoti.pw's folder name, kept so files added before the rename to dxify are still found.
     NSString *directory = [[documents stringByAppendingPathComponent:@"spoti.pw/JamesDSP"] stringByAppendingPathComponent:libraryName(kind)];
     os_unfair_lock_lock(&lock);
     BOOL isDirectory = NO;

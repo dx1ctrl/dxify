@@ -4,6 +4,7 @@
 #import "App/Onboarding/Onboarding.h"
 #import "Donate.h"
 
+// Vojtěch Škopek's, who made spoti.pw: dxify's support goes to the work it is built on.
 NSString *const SGKofiURL = @"https://ko-fi.com/darkksh";
 
 // Outside the "spotifyglass." prefix, so Reset all settings does not bring the sheet back early.
@@ -351,13 +352,13 @@ static char kCardGlassKey;
     [self.view addSubview:_card];
 
     UIView *hero = [self hero];
-    UILabel *eyebrow = [self label:@"A STUDENT PROJECT" font:[UIFont systemFontOfSize:12 weight:UIFontWeightBold] color:SGKofiColor()];
+    UILabel *eyebrow = [self label:@"BUILT ON SPOTI.PW" font:[UIFont systemFontOfSize:12 weight:UIFontWeightBold] color:SGKofiColor()];
     eyebrow.attributedText = [[NSAttributedString alloc] initWithString:eyebrow.text attributes:@{NSKernAttributeName: @1.4}];
-    UILabel *title = [self label:@"Enjoying spoti.pw?" font:[UIFont systemFontOfSize:26 weight:UIFontWeightBold] color:UIColor.whiteColor];
-    UILabel *body = [self label:@"I'm a student and I build it for free, in my spare time. If it made your music better, a coffee helps me keep going."
+    UILabel *title = [self label:@"Enjoying dxify?" font:[UIFont systemFontOfSize:26 weight:UIFontWeightBold] color:UIColor.whiteColor];
+    UILabel *body = [self label:@"dxify is built on spoti.pw, Vojtěch Škopek's free student project, and most of what you see here started there. If it made your music better, a coffee says thanks."
                            font:[UIFont systemFontOfSize:15] color:[UIColor colorWithWhite:1 alpha:0.72]];
 
-    SGKofiButton *donate = [[SGKofiButton alloc] initWithTitle:@"Buy me a coffee" prominent:YES];
+    SGKofiButton *donate = [[SGKofiButton alloc] initWithTitle:@"Buy Vojtěch a coffee" prominent:YES];
     [donate addTarget:self action:@selector(donate) forControlEvents:UIControlEventTouchUpInside];
 
     UIButtonConfiguration *config = [UIButtonConfiguration plainButtonConfiguration];
@@ -366,7 +367,7 @@ static char kCardGlassKey;
     UIButton *later = [UIButton buttonWithConfiguration:config primaryAction:nil];
     [later addTarget:self action:@selector(later) forControlEvents:UIControlEventTouchUpInside];
 
-    UILabel *thanks = [self label:@"Also built on Spicy Lyrics, JamesDSP and EeveeSpotify. Thank you to everyone behind them."
+    UILabel *thanks = [self label:@"Also built on JamesDSP, EeveeSpotify and LRCLIB. Thank you to everyone behind them."
                              font:[UIFont systemFontOfSize:11] color:[UIColor colorWithWhite:1 alpha:0.38]];
 
     UIStackView *column = [[UIStackView alloc] initWithArrangedSubviews:@[hero, eyebrow, title, body, donate, later, thanks]];
@@ -473,7 +474,7 @@ void SGShowDonateSheet(void) {
 }
 
 SGModRow *SGDonateRow(void) {
-    SGModRow *row = SGWithSymbol(SGActionRow(@"Support spoti.pw", @"Buy the student behind it a coffee", ^{ SGShowDonateSheet(); }), @"cup.and.saucer.fill");
+    SGModRow *row = SGWithSymbol(SGActionRow(@"Support spoti.pw", @"dxify is built on it: buy its creator a coffee", ^{ SGShowDonateSheet(); }), @"cup.and.saucer.fill");
     row.color = SGKofiColor();
     return row;
 }
