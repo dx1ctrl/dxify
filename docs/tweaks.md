@@ -1,5 +1,10 @@
 # Working on the mod
 
+dxify is a fork of [spoti.pw](https://github.com/skopevoj/spoti.pw) 0.21.1 by Vojtěch Škopek, and almost
+everything below is their design. Inside the code the mod still goes by spoti.pw's working name,
+Spotify Glass: the `SG` and `SGR` prefixes, the `spotifyglass.` keys, the `spotifyglass` dylib and the
+`[spotifyglass]` log tag. They stay, so settings carry over from spoti.pw and the tooling keeps working.
+
 ## Layout
 
     tweak/                      the Theos project: Makefile, control, the bundle filter plist
@@ -71,28 +76,20 @@ A feature is a directory in its layer holding everything about one area of the a
 
 Shared:
 
-    AdBlock/      EeveeSpotify's ad blocking: the ad and upsell services silenced (AdServices.x), ad components out of the
-                  Hub JSON (AdHubs.x) and the feeds (Feeds.m), Premium pop-ups dropped (AdPopups.x), and the responses
-                  rewritten on the way in (AdNetwork.x, Premium.m over the protobuf walker in Protobuf.m), with crossfade
-                  and automix switched on in the player core and crossfade's switch kept in step with its slider (Crossfade.x)
-    Privacy/      telemetry blocking and its counters
+    Privacy/      telemetry blocking and its counters, and the Search switches that force a flag off (SearchClutter.m).
+                  dxify leaves Spotify's ads, upsells and Premium state alone: spoti.pw 0.21.1's AdBlock/ is gone
     ArtistBlock/  tracks by blocked artists skipped as they start (ArtistSkip.x), the list and the Blocked artists page under Player
     Flags/        Spotify's remote-config flags: the provider hook, the generated table, the All flags page and the Labs page
     Gestures/     the double tap zones on the player: the grid, what each cell does, the recognizer (each look hooks it on)
     Lyrics/       the lyrics engine for the redesign's Apple Music style lyrics and the lock screen: lines read from
                   color-lyrics and the player's clock (KaraokeSource.x), words timed by estimate inside Spotify's line
-                  times (KaraokeTiming.m), which line to name where two voices sing at once (the one that came in first,
+                  times (KaraokeTiming.m, through the protobuf walker in Protobuf.m), which line to name where two voices sing at once (the one that came in first,
                   for the lock screen and the Live Activity), and the Lyrics page's parts
     LyricsSources/ the sources lyrics come from, asked in the order the Lyrics page puts them in and merged into the
                   best answer (LyricsSources.m, the list to drag in LyricsSourcesPage.m): Apple Music's TTML from
                   BiniLyrics.m and Unison.m, read by SGTTML.m, which carries a second voice and the
                   backing vocals, and in its head Apple's translation and its pronunciation of a line, the pronunciation
-                  timed word by word (the translation taken in the Lyrics page's language); SpicyLyrics.m (spicylyrics.org),
-                  matched by Spotify's track id and carrying Apple Music's syllables, the backing vocals and the two sides
-                  of a duet as the TTML does, answered in a packed shape of its own (every distinct value once, then an
-                  opcode stream rebuilding the document) and only to a caller that sends the app's own Spotify token, which
-                  SGKaraokeSpotifyAuthorization() lends it — the one source told anything of the account, which is why
-                  the page says so; Musixmatch.m, matched by Spotify's track id with an anonymous token, word timed where
+                  timed word by word (the translation taken in the Lyrics page's language); Musixmatch.m, matched by Spotify's track id with an anonymous token, word timed where
                   it has richsync; NetEase.m, word timing from yrc for what the others only line time; LrcLib.m, open and
                   keyless and timed by the line, the floor under the rest. color-lyrics is answered with whichever won
                   (LyricsHook.x): Spotify's own 200 gets our lines swapped in; a track Spotify's metadata says has none has
@@ -117,7 +114,7 @@ Shared:
                   each finished buffer through SGDSPEngine.m, libjamesdsp re-blocked to 1024 frames one block late, in
                   place (JamesDSP.x). The buffers are in the unit's output format, the hardware's, not the client format
                   Spotify sets. Settings apply as they change, on a queue of its own; the file effects read their files
-                  from Documents/spoti.pw/JamesDSP (JamesDSPFiles.m). Tested on the Mac against harness/jamesdsp/,
+                  from Documents/spoti.pw/JamesDSP (JamesDSPFiles.m; spoti.pw's folder, kept). Tested on the Mac against harness/jamesdsp/,
                   the hook in the simulator against its sim/
     Haptics/      Vibrations (Haptics.h lists its files): a tap of UIKit's feedback generators for the player's and the now
                   playing bar's controls, the scrubber's tenths and ends, cover swipes, gestures and the lyrics page's tap to
@@ -209,7 +206,7 @@ App:
 
     ModSettings.x  the root page and the rows that open it from Spotify's settings and the side drawer
     Pages.m        the Appearance card with Redesigned UI, the Player and Lyrics pages, which Navbar page opens
-    About/         the update check against the repo's GitHub Releases, the Updates page it fills (the state, and
+    About/         the update check against dxify's GitHub Releases (nothing about the install is sent), the Updates page it fills (the state, and
                    the changelog of every release newer than the build, a line per commit) and the sheet a newer
                    release brings up on its own a few seconds after Spotify opens, once per release; backup, the
                    signing warning and the Mod page with the reset
@@ -226,7 +223,7 @@ and Live Activity. The root page in `App/ModSettings.x` holds the Appearance car
 
 ## Make targets
 
-    make build      # out/spoti.pw-<version>.ipa with FLEX in it
+    make build      # out/dxify-<version>.ipa with FLEX in it
     make release    # the same without FLEX
     make install    # build without FLEX, sign with your certificate, install over USB
     make install FLEX=1   # the same with FLEX, which is what make trees reads through
@@ -268,17 +265,15 @@ opening out into its sliders, choices, curve or file library while its switch is
 changes; the row reads out Off, On or how many effects are on. Home & Library, in the native look only:
 the Gradient page (the wash behind the top of Home in one of eight colours, at three strengths and
 four heights) and the Home flags, the parts of Home to hide including the DJ button and badge, the
-playlist header, buttons and pills to hide, and the Library flags. Then Premium, ads & privacy
-(EeveeSpotify's Hide ads and Hide upsells, hiding the video carousel and social proof in Search, and
-an Ad and upsell flags page under them, every switch there forcing a flag Spotify ships on to off;
-Spoof Premium; Block telemetry; then what the ad
-blocking and the telemetry blocking have stopped) and Labs (features Spotify built and did not ship,
+playlist header, buttons and pills to hide, and the Library flags. Then Privacy (Block telemetry,
+hiding the video carousel and social proof in Search, a Tips page whose switches each force a flag
+Spotify ships on to off, then what the telemetry blocking has stopped) and Labs (features Spotify built and did not ship,
 AI Chat (Martini) first). Last, All flags, Spotify's remote-config flags with a search field and an
 Auto / Off / On control per flag (a text field for the number and text ones), and Mod: Updates
 (the row reads out where the build stands and opens the changelog of everything newer than it, read
 from the releases Release Please cuts, with Check now, the release to get, all the releases and Tell
 me when one is out, the sheet a newer release brings up a few seconds after Spotify opens), the
-build and Spotify's version, the site and the repo, the welcome tour again and Reset all
+build and Spotify's version, spoti.pw's site and dxify's repo, the welcome tour again and Reset all
 settings. A flag switch on a page forces that one flag and off leaves Spotify's own value, so the All
 flags page is where a flag goes back to Auto. Spotify ships its newer design behind several flags at
 once, and the redesign is built on it (the glass navigation bar, the new player slider, the sheet style
