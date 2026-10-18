@@ -189,16 +189,13 @@ people who run them.
 ### Design and tools
 
 The redesign follows Apple's Liquid Glass, the Music app's layouts and Apple's Human Interface
-Guidelines. The agent skills in [`.agents/skills`](.agents/skills/README.md) come from
-[haider-nawaz/liquid-glass-skill](https://github.com/haider-nawaz/liquid-glass-skill),
-[dickwu/apple-design-skill](https://github.com/dickwu/apple-design-skill) and
-[Emil Kowalski's skills](https://github.com/emilkowalski/skills), under their own licenses.
+Guidelines.
 
 ## License
 
 dxify is free software under the [GNU General Public License v3.0](LICENSE). It is a modified version of
 spoti.pw 0.21.1 by Vojtěch Škopek, which was released under the same license. dxify's changes, made by
-dx1ctrl from 11 October 2026 on, are listed above and in the git history. Files in `vendor/` and
-`.agents/` keep their own licenses.
+dx1ctrl from 11 October 2026 on, are listed above and in the git history. Files in `vendor/` keep
+their own licenses.
 
 Not affiliated with Spotify, and not with spoti.pw beyond being built on it.

@@ -70,7 +70,7 @@ void SGRHomeProbeEnd(SGRHomeProbe probe, CFTimeInterval began) {
     memcpy(_calls, sg_calls, sizeof(_calls));
     memcpy(_time, sg_time, sizeof(_time));
     _link = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
-    // A link left at its default rate holds the whole app to 60 Hz while it runs (CLAUDE.md).
+    // A link left at its default rate holds the whole app to 60 Hz while it runs (AGENTS.md).
     if (@available(iOS 15.0, *)) _link.preferredFrameRateRange = CAFrameRateRangeMake(80, 120, 120);
     [_link addToRunLoop:NSRunLoop.mainRunLoop forMode:NSRunLoopCommonModes];
 }
