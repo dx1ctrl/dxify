@@ -6,8 +6,7 @@ A Theos tweak (Objective-C + Logos) injected into the decrypted Spotify iOS app.
 dxify is a GPL-3.0 fork of spoti.pw 0.21.1 by Vojtěch Škopek; keep the credit to it wherever the name
 appears. Internal names keep spoti.pw's working name, Spotify Glass (`SG`/`SGR` prefixes, `spotifyglass.`
 keys, the `spotifyglass` dylib, the `[spotifyglass]` log tag), so settings carry over: don't rename them.
-dxify leaves Spotify's ads, upsells and Premium state alone, and never sends the account's token or
-anything about the install anywhere.
+dxify never sends the account's token or anything about the install anywhere.
 
 ## Two looks, never both
 

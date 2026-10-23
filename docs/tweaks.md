@@ -77,7 +77,6 @@ A feature is a directory in its layer holding everything about one area of the a
 Shared:
 
     Privacy/      telemetry blocking and its counters, and the Search switches that force a flag off (SearchClutter.m).
-                  dxify leaves Spotify's ads, upsells and Premium state alone: spoti.pw 0.21.1's AdBlock/ is gone
     ArtistBlock/  tracks by blocked artists skipped as they start (ArtistSkip.x), the list and the Blocked artists page under Player
     Flags/        Spotify's remote-config flags: the provider hook, the generated table, the All flags page and the Labs page
     Gestures/     the double tap zones on the player: the grid, what each cell does, the recognizer (each look hooks it on)

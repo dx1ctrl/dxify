@@ -1,5 +1,5 @@
 // The Search switches of the Privacy page: each forces off the flags behind something Search shows
-// unasked. dxify leaves Spotify's ads, upsells and Premium state alone.
+// unasked.
 #import "Core/SGCore.h"
 #import "Privacy.h"
 

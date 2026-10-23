@@ -81,10 +81,7 @@ Compared with spoti.pw 0.21.1:
   GitHub releases.
 - **The update notice shows once per release**, not on every launch. A leftover debug line brought it
   back each time.
-- **No Premium spoofing, no ad or upsell hacks.** dxify is a look-and-feel mod. Spoof Premium, Hide ads
-  and Hide upsells rewrote your account's state and Spotify's traffic, which risks the account, so
-  they're removed. Telemetry blocking, the Search clutter switches and the tips moved to a new
-  **Privacy** page.
+- **A new Privacy page** holds telemetry blocking, the Search clutter switches and the tips.
 - **Every push is compiled in CI**, so a change that doesn't build never reaches a release.
 - **Credit where it's due.** The app's Mod page and its coffee button now point to spoti.pw and its
   creator.
