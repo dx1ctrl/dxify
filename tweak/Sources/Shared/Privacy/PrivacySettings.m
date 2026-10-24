@@ -38,9 +38,13 @@ UIViewController *SGPrivacySettingsPage(void) {
         SGSection(@"Telemetry", @[
             SGWithSymbol(SGSwitchRow(@"Block telemetry", @"Spotify's own events still go out, since Recents is built from them", SGKeyBlockTelemetry), @"antenna.radiowaves.left.and.right.slash"),
         ]),
+        SGSection(@"Sharing", @[
+            SGWithSymbol(SGOptionRow(@"Clean share links", @"Takes the si= that names your account, and any utm_ tags, off the links you copy or share", SGKeyCleanShareLinks), @"link"),
+        ]),
         SGSection(@"Clutter", @[
             SGWithSymbol(SGOptionRow(@"Hide the video carousel in Search", nil, SGKeyHideSearchVideos), @"play.rectangle.on.rectangle"),
             SGWithSymbol(SGOptionRow(@"Hide social proof in Search", nil, SGKeyHideSocialProof), @"person.2"),
+            SGWithSymbol(SGOptionRow(@"Block rating prompts", @"No App Store \"Enjoying Spotify?\" sheet", SGKeyBlockRatingPrompts), @"star.slash"),
             SGWithSymbol(SGPageRow(@"Tips", ^UIViewController *{ return tipsPage(); }), @"lightbulb"),
         ]),
         SGSection(@"Telemetry blocked so far", counts),
