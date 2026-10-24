@@ -153,7 +153,9 @@ NSArray<SGLyricsProvider *> *SGLyricsAllProviders(void) {
             make(@"musixmatch", @"Musixmatch", @"Spotify's licensed catalogue", SGMusixmatchAsk),
             make(@"unison", @"Unison", @"Hand-timed, few tracks", SGUnisonAsk),
             make(@"netease", @"NetEase", @"Word timing, censored", SGNetEaseAsk),
+            make(@"petit", @"PetitLyrics", @"Japanese, line timing", SGPetitAsk),
             make(@"lrclib", @"LRCLIB", @"Line timing, open fallback", SGLrcLibAsk),
+            make(@"genius", @"Genius", @"Plain text, no timing", SGGeniusAsk),
         ];
     });
     return all;
