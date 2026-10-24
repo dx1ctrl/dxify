@@ -76,8 +76,12 @@ A feature is a directory in its layer holding everything about one area of the a
 
 Shared:
 
-    Privacy/      telemetry blocking and its counters, and the Search switches that force a flag off (SearchClutter.m).
-                  dxify leaves Spotify's ads, upsells and Premium state alone: spoti.pw 0.21.1's AdBlock/ is gone
+    Privacy/      telemetry blocking and its counters, and the Search switches that force a flag off (SearchClutter.m);
+                  the si= and utm_ tags taken off the open.spotify.com links that leave the app, by the pasteboard, the
+                  share sheet or a deep link to another app (ShareLinks.x), and the App Store rating prompt stopped
+                  (RatingPrompts.x), both off until switched on and ported from EeveeSpotify Reincarnated.
+                  dxify leaves Spotify's ads, upsells and Premium state alone: spoti.pw 0.21.1's AdBlock/ is gone, and
+                  so is everything of the kind in EeveeSpotify
     ArtistBlock/  tracks by blocked artists skipped as they start (ArtistSkip.x), the list and the Blocked artists page under Player
     Flags/        Spotify's remote-config flags: the provider hook, the generated table, the All flags page and the Labs page
     Gestures/     the double tap zones on the player: the grid, what each cell does, the recognizer (each look hooks it on)
@@ -90,8 +94,10 @@ Shared:
                   BiniLyrics.m and Unison.m, read by SGTTML.m, which carries a second voice and the
                   backing vocals, and in its head Apple's translation and its pronunciation of a line, the pronunciation
                   timed word by word (the translation taken in the Lyrics page's language); Musixmatch.m, matched by Spotify's track id with an anonymous token, word timed where
-                  it has richsync; NetEase.m, word timing from yrc for what the others only line time; LrcLib.m, open and
-                  keyless and timed by the line, the floor under the rest. color-lyrics is answered with whichever won
+                  it has richsync; NetEase.m, word timing from yrc for what the others only line time; Petit.m,
+                  PetitLyrics' Japanese catalogue, each line timed by its first word; LrcLib.m, open and keyless and
+                  timed by the line, the floor under the rest; Genius.m, plain text for a page nothing else has words
+                  for (Petit and Genius ported from EeveeSpotify Reincarnated). color-lyrics is answered with whichever won
                   (LyricsHook.x): Spotify's own 200 gets our lines swapped in; a track Spotify's metadata says has none has
                   its request sent to a donor track that does, so the reply is a real 200 (a 404 answered as a 200 in the
                   delegate alone never showed the card on 9.1.78); a 404 for a track not seen yet is held until the chain
@@ -102,8 +108,18 @@ Shared:
                   source is on
     LockScreenLyrics/ the line being sung in the system's now playing
     Navigation/   the page transition fix (PageTransition.x) and opening a spotify: link (Links.x)
+    CarPlay/      CarPlay's two calls about the Siri cell made to do nothing, since on a re-signed build either can
+                  raise and take Spotify down (CarPlay.x, waiting for CarPlay.framework's classes; from EeveeSpotify
+                  Reincarnated)
+    SponsorBlock/ the sponsor reads and self-promotion of podcast episodes skipped, from the SponsorBlock database
+                  (SponsorBlock.h says what is sent: a five character hash prefix, never the episode): the episode's
+                  segments asked for once, the playhead looked at four times a second while one plays, a segment and
+                  any joining it skipped in one seek and each only once per listen, and the segments marked on the
+                  scrubber at UISlider's own track rect, so under either look (SponsorBlock.x). The categories apply
+                  as they change; ported from EeveeSpotify Reincarnated, skipping only
     Player/       the player's open and close announced (PlayerEvents.x), what the player is doing read through
-                  one hook for every feature that wants it (PlayerState.x), the lock screen widget's flags, and in the
+                  one hook for every feature that wants it (PlayerState.x, which also hands out the player itself for a
+                  feature that drives it), the lock screen widget's flags, and in the
                   more button's menu Speed and pitch: both done to Spotify's audio by Apple's time and pitch unit, put
                   between its mixer and its RemoteIO unit by taking over the connection Spotify makes between them
                   (SpeedPitchMenu.x, SpeedPitch.x, SGTimePitch.m). The block goes into Spotify's own context menu sheet
@@ -247,7 +263,7 @@ The pages show only what the stored look has: a page opened after flipping the s
 what the restart will bring. Then a card of parts. Navbar: the tab editor of the stored look, each with
 its own list of tabs. Player: Gestures, Lyrics (the ordered list of lyrics sources, lyrics for every track,
 naming the source in the redesign, the lock screen, and glass lyrics in the native look; in the redesign also
-which of the lyrics, their pronunciation and their translation is set largest, and the translation's language), Blocked artists (with the count on the row) and Lock screen widget, which work with either look;
+which of the lyrics, their pronunciation and their translation is set largest, and the translation's language), Blocked artists (with the count on the row), SponsorBlock (its switch, opening out into the categories it skips) and Lock screen widget, which work with either look;
 in the native look also Now playing bar (its device button and its flags), Queue & devices, and
 Spotify's own player screen (artwork background, glass header buttons, Disable Canvas and the sheet,
 header, slider and sticky header flags, the cards under the player and the lyrics preview and player
@@ -266,8 +282,8 @@ changes; the row reads out Off, On or how many effects are on. Home & Library, i
 the Gradient page (the wash behind the top of Home in one of eight colours, at three strengths and
 four heights) and the Home flags, the parts of Home to hide including the DJ button and badge, the
 playlist header, buttons and pills to hide, and the Library flags. Then Privacy (Block telemetry,
-hiding the video carousel and social proof in Search, a Tips page with the flags behind Spotify's tips
-and nudges, then what the telemetry blocking has stopped) and Labs (features Spotify built and did
+Clean share links, hiding the video carousel and social proof in Search, Block rating prompts, a Tips
+page with the flags behind Spotify's tips and nudges, then what the telemetry blocking has stopped) and Labs (features Spotify built and did
 not ship, AI Chat (Martini) first). Last, All flags, Spotify's remote-config flags with a search field and an
 Auto / Off / On control per flag (a text field for the number and text ones), and Mod: Updates
 (the row reads out where the build stands and opens the changelog of everything newer than it, read

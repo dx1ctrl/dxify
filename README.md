@@ -58,8 +58,8 @@ IPA and sign it with your own certificate. Settings → **Mod Settings** picks o
 
 Under either look you also get lyrics from the sources you pick, lyrics on the lock screen, a Live
 Activity, JamesDSP audio effects, vibrations that play along with the music, speed and pitch, double-tap
-gestures on the player, blocked artists, telemetry blocking, and every one of Spotify's
-remote-config flags.
+gestures on the player, blocked artists, SponsorBlock for podcasts, telemetry blocking, share links
+without tracking tags, and every one of Spotify's remote-config flags.
 
 | | |
 |---|---|
@@ -85,6 +85,12 @@ Compared with spoti.pw 0.21.1:
   and Hide upsells rewrote your account's state and Spotify's traffic, which risks the account, so
   they're removed. Telemetry blocking, the Search clutter switches and the tips moved to a new
   **Privacy** page.
+- **From [EeveeSpotify Reincarnated](https://github.com/SideloadLabs/EeveeSpotifyReincarnated)**, rewritten
+  in Objective-C: **SponsorBlock** skips sponsor reads and self-promotion in podcast episodes and marks
+  them on the scrubber (Player → SponsorBlock), **Clean share links** takes the `si=` that names your
+  account off the links you share, **Block rating prompts** stops the App Store prompt (both on the
+  Privacy page), **Genius** and **PetitLyrics** join the lyrics sources, and a CarPlay crash on
+  re-signed builds is fixed. Its Premium, ad, upsell and session patches are left out, as above.
 - **Every push is compiled in CI**, so a change that doesn't build never reaches a release.
 - **Credit where it's due.** The app's Mod page and its coffee button now point to spoti.pw and its
   creator.
@@ -171,7 +177,8 @@ its history is in [CHANGELOG.md](CHANGELOG.md).
 
 | Project | By | What dxify uses it for |
 |---|---|---|
-| [EeveeSpotify](https://github.com/whoeevee/EeveeSpotify) and [EeveeSpotify Reincarnated](https://github.com/SideloadLabs/EeveeSpotifyReincarnated) | whoeevee, SideloadLabs | The way the lyrics hook answers Spotify's lyrics requests |
+| [EeveeSpotify](https://github.com/whoeevee/EeveeSpotify) and [EeveeSpotify Reincarnated](https://github.com/SideloadLabs/EeveeSpotifyReincarnated) | whoeevee, SideloadLabs and their contributors | The way the lyrics hook answers Spotify's lyrics requests; SponsorBlock, clean share links, the rating prompt block, the CarPlay crash fix and the Genius and PetitLyrics sources, ported from Reincarnated 7.0.0 (GPL-3.0) |
+| [SponsorBlock](https://sponsor.ajay.app) and [Spot-SponsorBlock](https://github.com/Spot-SponsorBlock/Spot-SponsorBlock-Extension) | Ajay Ramachandran and the SponsorBlock community | The podcast segments that are skipped, and the way Spotify's episodes are keyed in SponsorBlock's database |
 | [JamesDSP](https://github.com/james34602/JamesDSPManager) | James Fung | The audio effects engine, libjamesdsp (GPLv2, in `vendor/libjamesdsp`) |
 | [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) | Audio4Linux | libjamesdsp as it is packaged here |
 | [RootlessJamesDSP](https://github.com/timschneeb/RootlessJamesDSP) | Tim Schneeberger | The bundled Liveprog scripts and DDC presets |
@@ -183,8 +190,8 @@ its history is in [CHANGELOG.md](CHANGELOG.md).
 
 Lyrics come only from the services you switch on: [LRCLIB](https://lrclib.net),
 [Musixmatch](https://www.musixmatch.com), [NetEase Cloud Music](https://music.163.com),
-BiniLyrics and Unison (Better Lyrics' hand-timed lyrics). Each is sent only the track. Thank you to the
-people who run them.
+BiniLyrics, Unison (Better Lyrics' hand-timed lyrics), [Genius](https://genius.com) and
+[PetitLyrics](https://petitlyrics.com). Each is sent only the track. Thank you to the people who run them.
 
 ### Design and tools
 

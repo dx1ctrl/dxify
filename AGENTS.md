@@ -22,7 +22,7 @@ anything about the install anywhere.
   throughout, and its own accent colour. No native tweak runs.
 
 Anything that doesn't draw on Spotify's screens works the same under both: privacy, lyrics
-sources, gestures, blocked artists, flags, Vibrations, Speed and pitch, and the Live Activity. Those
+sources, gestures, blocked artists, SponsorBlock, flags, Vibrations, Speed and pitch, and the Live Activity. Those
 last three were the redesign's until they moved to `Shared/`, so their keys lost the `.redesign.` and
 `Core/SGPrefs.h`'s `SGMigrateKey` carries the old ones over at launch.
 
