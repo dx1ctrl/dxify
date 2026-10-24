@@ -22,3 +22,6 @@ NSString *SGURIString(id uri);
 void SGAddPlayerStateObserver(id<SGPlayerStateObserver> observer);
 // The last state reported, nil before the player has reported one.
 SPTPlayerState *SGPlayerState(void);
+// The SPTEsperantoPlayer the mod's observer is on, for a feature that drives it (seekTo:); nil until
+// the app has added an observer to it.
+id SGPlayer(void);
