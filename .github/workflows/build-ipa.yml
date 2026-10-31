@@ -50,8 +50,12 @@ jobs:
       - uses: actions/upload-artifact@v5
         if: inputs.upload_method != 'filebin'
         with:
-          name: dxify.ipa
-          path: out/*.ipa
+          name: dxify-build
+          path: |
+            out/*.ipa
+            out/eevee/EeveeSpotifyReincarnated-source.tar.gz
+            out/eevee/EeveeSpotifyReincarnated-LICENSE.txt
+            out/eevee/BUILD-INFO.txt
           if-no-files-found: error
 
       - name: Upload to filebin.net
@@ -59,7 +63,7 @@ jobs:
         run: |
           BIN="dxify-${{ github.run_id }}"
           echo "### filebin.net download" >> "$GITHUB_STEP_SUMMARY"
-          for f in out/*.ipa; do
+          for f in out/*.ipa out/eevee/EeveeSpotifyReincarnated-source.tar.gz out/eevee/EeveeSpotifyReincarnated-LICENSE.txt out/eevee/BUILD-INFO.txt; do
             curl -fsS -X POST -H "Content-Type: application/octet-stream" --data-binary "@$f" "https://filebin.net/$BIN/$(basename "$f")" >/dev/null
             echo "- https://filebin.net/$BIN/$(basename "$f")" >> "$GITHUB_STEP_SUMMARY"
           done

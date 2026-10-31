@@ -9,6 +9,11 @@ keys, the `spotifyglass` dylib, the `[spotifyglass]` log tag), so settings carry
 dxify leaves Spotify's ads, upsells and Premium state alone, and never sends the account's token or
 anything about the install anywhere.
 
+The optional `Player → Podcast SponsorBlock` integration is built from pinned
+EeveeSpotifyReincarnated sources. It only activates SponsorBlock, is off by default, and sends a hashed
+podcast track identifier prefix to the SponsorBlock service when enabled. Premium, ad-blocking, lyrics,
+visual, and settings hooks from Eevee remain inactive; dxify owns those areas and its App Group shim.
+
 ## Two looks, never both
 
 **Redesigned UI** (Mod Settings → Appearance) picks one of two looks, read once at launch:

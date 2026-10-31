@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the dxify tweak (internally still spotifyglass, spoti.pw's working name) and injects it
+# Builds dxify and its SponsorBlock-only EeveeSpotifyReincarnated integration, then injects them
 # (plus FLEX) into a decrypted Spotify IPA.
 #
 #   scripts/pipeline.sh <decrypted.ipa> [-o out.ipa] [--no-flex] [--install] [--name N] [--icon P.png]   (or: make build / make install)
@@ -108,9 +108,20 @@ xcrun --sdk iphoneos clang -target arm64-apple-ios16.0 -dynamiclib -fobjc-arc -O
   -install_name @rpath/SpotifyGlassAppGroups.dylib -o "$GROUPS_DYLIB" "$ROOT/extension/AppGroups/AppGroups.m"
 FILES+=("$GROUPS_DYLIB")
 
+echo "==> building the SponsorBlock-only EeveeSpotifyReincarnated integration"
+"$ROOT/scripts/build-eevee.sh"
+FILES+=(
+  "$ROOT/out/eevee/EeveeSpotify.dylib"
+  "$ROOT/out/eevee/EeveeSwiftProtobuf.framework"
+  "$ROOT/out/eevee/EeveeSpotify.bundle"
+)
+
 echo "==> injecting"
 # -w drops the Watch app: its companion-app key would still name com.spotify.client and block the install.
 cyan -i "$IN" -o "$OUT" -f "${FILES[@]}" -l "$ROOT/plist/liquid-glass.plist" ${BUNDLE_ID:+-b "$BUNDLE_ID"} ${NAME:+-n "$NAME"} ${ICON:+-k "$ICON"} -w -s --overwrite
+
+echo "==> injecting the keychain and CloudKit sideload shim"
+"$ROOT/out/eevee/ipapatch" --input "$OUT" --inplace --noconfirm --dylib "$ROOT/out/eevee/zxPluginsInject.dylib"
 
 echo "==> loading the App Group shim in the home screen widget"
 WIDGET_BIN="${APP_DIR}PlugIns/WidgetExtension.appex/WidgetExtension"

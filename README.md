@@ -58,8 +58,10 @@ IPA and sign it with your own certificate. Settings → **Mod Settings** picks o
 
 Under either look you also get lyrics from the sources you pick, lyrics on the lock screen, a Live
 Activity, JamesDSP audio effects, vibrations that play along with the music, speed and pitch, double-tap
-gestures on the player, blocked artists, telemetry blocking, and every one of Spotify's
-remote-config flags.
+gestures on the player, blocked artists, telemetry blocking, podcast SponsorBlock, and every one of
+Spotify's remote-config flags. **Podcast SponsorBlock** is in Mod Settings → Player and is off by
+default; when enabled it sends the first five characters of the podcast track ID's SHA-256 hash to
+SponsorBlock to look up community-submitted segments.
 
 | | |
 |---|---|
@@ -99,6 +101,11 @@ Fork this repo, enable Actions, and run **Build IPA from your own Spotify IPA**.
 to your decrypted `.ipa` and hands the built IPA back as a workflow artifact. No Mac needed. The link is
 masked in the log and the result stays in your fork.
 
+The build also compiles pinned EeveeSpotifyReincarnated source for its optional podcast SponsorBlock
+feature. Its Premium, ad-blocking, lyrics, visual, and settings hooks stay inactive so they do not
+overlap dxify or change Spotify's subscription state. The build workflow compiles both tweaks without
+needing an IPA.
+
 ### Build on a Mac
 
 You need Theos in `~/theos` and Xcode with an iPhoneOS 26+ SDK (`xcode-select` it). An SDK in
@@ -115,7 +122,9 @@ Put the decrypted `.ipa` in `ipa/`, then:
 `make install` reads `SIGN_P12`, `SIGN_PROFILE` and `SIGN_P12_PASSWORD` from `.signing.env`. Copy
 `.signing.env.example` and fill it in.
 
-The first build spends a minute reading Spotify's flags out of your IPA. `make flags` regenerates them.
+The first build also fetches and compiles EeveeSpotifyReincarnated at the pinned commit. It needs Git,
+Python 3, curl, and Xcode tools, which are normally present on a Mac. The build downloads the pinned
+ipapatch release into `out/`. Spotify's flag table is read from your IPA; `make flags` regenerates it.
 
 ### Signing
 
@@ -169,7 +178,8 @@ its history is in [CHANGELOG.md](CHANGELOG.md).
 
 | Project | By | What dxify uses it for |
 |---|---|---|
-| [EeveeSpotify](https://github.com/whoeevee/EeveeSpotify) and [EeveeSpotify Reincarnated](https://github.com/SideloadLabs/EeveeSpotifyReincarnated) | whoeevee, SideloadLabs | The way the lyrics hook answers Spotify's lyrics requests |
+| [EeveeSpotify Reincarnated](https://github.com/SideloadLabs/EeveeSpotifyReincarnated) | SideloadLabs | The opt-in podcast SponsorBlock feature and sideload keychain/CloudKit compatibility shim; only SponsorBlock is activated |
+| [EeveeSpotify](https://github.com/whoeevee/EeveeSpotify) | whoeevee | The technique dxify's own lyrics hook uses to answer Spotify's lyrics requests |
 | [JamesDSP](https://github.com/james34602/JamesDSPManager) | James Fung | The audio effects engine, libjamesdsp (GPLv2, in `vendor/libjamesdsp`) |
 | [JDSP4Linux](https://github.com/Audio4Linux/JDSP4Linux) | Audio4Linux | libjamesdsp as it is packaged here |
 | [RootlessJamesDSP](https://github.com/timschneeb/RootlessJamesDSP) | Tim Schneeberger | The bundled Liveprog scripts and DDC presets |
@@ -195,5 +205,8 @@ dxify is free software under the [GNU General Public License v3.0](LICENSE). It 
 spoti.pw 0.21.1 by Vojtěch Škopek, which was released under the same license. dxify's changes, made by
 dx1ctrl from 11 October 2026 on, are listed above and in the git history. Files in `vendor/` keep
 their own licenses.
+
+The IPA build artifact includes the pinned, modified EeveeSpotifyReincarnated source archive and its
+GPL-3.0 license alongside the output, so the integration's source is available with the build.
 
 Not affiliated with Spotify, and not with spoti.pw beyond being built on it.

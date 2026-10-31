@@ -19,7 +19,7 @@ Spotify Glass: the `SG` and `SGR` prefixes, the `spotifyglass.` keys, the `spoti
     tweak/Sources/Native/       tweaks on Spotify's own screens, running only while Redesigned UI is off
     tweak/Sources/Redesigned/   the redesign, running only while Redesigned UI is on
     tweak/Sources/App/          what brings the layers together: Mod Settings' root and composed pages, the Mod page,
-                                backup and signing, the welcome tour
+                                backup and signing, the welcome tour, and the optional SponsorBlock settings bridge
     tweak/Sources/Diagnostics/  screen dumps, the tree server and the main thread hang sampler of FLEX builds
     extension/LiveActivity/     the Live Activity widget, a WidgetKit extension of its own
     extension/AppGroups/        a dylib loaded by Spotify and its home screen widget that moves Spotify's App Groups
@@ -48,7 +48,8 @@ screens works under both. So the sources are four layers, each a directory of fe
     Shared/       works the same with either look
     Native/       Spotify's own screens tweaked; every %ctor starts with `if (!SGNativeUI()) return;`
     Redesigned/   the redesign; every %ctor starts with `if (!SGRedesignedUI()) return;`
-    App/          Mod Settings' root and the pages that combine the layers, the Mod page, the tour
+    App/          Mod Settings' root and the pages that combine the layers, the Mod page, the tour, and the optional
+                  SponsorBlock settings bridge
 
 `SGRedesignAvailable()` (Core/SGUIMode.h) holds the redesign to iOS 26 and up: it is Liquid Glass, and
 `UIGlassEffect` is the system's, so on an older OS the glass calls fall back to a blur and the redesign
@@ -251,7 +252,11 @@ which of the lyrics, their pronunciation and their translation is set largest, a
 in the native look also Now playing bar (its device button and its flags), Queue & devices, and
 Spotify's own player screen (artwork background, glass header buttons, Disable Canvas and the sheet,
 header, slider and sticky header flags, the cards under the player and the lyrics preview and player
-buttons to hide); in the redesign instead Now playing (its device button). Then Vibrations under either look, a card for
+buttons to hide); in the redesign instead Now playing (its device button). Podcast SponsorBlock can
+skip community-marked podcast segments and is off by default; when enabled it sends a five-character
+SHA-256 prefix of the podcast track ID to the service. It is built from pinned
+EeveeSpotifyReincarnated sources; Premium, ad-blocking, lyrics, visual, and settings hooks are inactive.
+Vibrations under either look, a card for
 Controls (on until switched off) and one for Music Haptics (off until switched on, with an ⓘ saying it
 follows the sound this iPhone plays while Spotify is open), each opening out while its switch is on:
 Controls into its Strength (10 to 100%, a tap at the new strength with each step), Music Haptics into its
