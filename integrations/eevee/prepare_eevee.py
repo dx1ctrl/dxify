@@ -97,6 +97,37 @@ def disable_default_hooks(root: Path) -> list[tuple[Path, bytes]]:
 
 def prepare_sideload_shim(root: Path) -> tuple[Path, bytes]:
     path, text, newline = read_text(root, SIDELOAD_FIX)
+
+    comment_start = "// Five pieces:\n"
+    comment_end = "#import <Foundation/Foundation.h>"
+    if text.count(comment_start) != 1 or text.count(comment_end) != 1:
+        raise PreparationError("Unreviewed zxPluginsInject header layout")
+    start = text.index(comment_start)
+    end = text.index(comment_end, start)
+    text = text[:start] + (
+        "// Two pieces:\n"
+        "//   1. SecItem* rebind — apps hard-code their entitled keychain access group;\n"
+        "//      resigning with another team makes that group invalid.\n"
+        "//   2. CKContainer / CKEntitlements neutered — resigned bundles have no iCloud\n"
+        "//      entitlements, so CloudKit lookups would assert.\n\n"
+    ) + text[end:]
+
+    interface_start = "@interface LSBundleProxy: NSObject\n"
+    access_group = "static NSString *accessGroupId;"
+    if text.count(interface_start) != 1 or text.count(access_group) != 1:
+        raise PreparationError("Unreviewed zxPluginsInject App Group declarations")
+    start = text.index(interface_start)
+    end = text.index(access_group, start) + len(access_group)
+    text = text[:start] + access_group + text[end:]
+
+    helpers_start = "// =========================================================================\n// helpers\n// =========================================================================\n"
+    keychain_section = "// =========================================================================\n// keychain access-group rebind (fishhook)\n// =========================================================================\n"
+    if text.count(helpers_start) != 1 or text.count(keychain_section) != 1:
+        raise PreparationError("Unreviewed zxPluginsInject App Group helper layout")
+    start = text.index(helpers_start)
+    end = text.index(keychain_section, start)
+    text = text[:start] + keychain_section + text[end + len(keychain_section):]
+
     start_marker = "// NSFileManager group container URL"
     end_marker = "// keychain access-group bootstrap"
     if text.count(start_marker) != 1 or text.count(end_marker) != 1:

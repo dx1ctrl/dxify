@@ -64,3 +64,13 @@ jobs:
 
       - name: Build Reincarnated SponsorBlock integration
         run: bash scripts/build-eevee.sh
+
+      - uses: actions/upload-artifact@v5
+        with:
+          name: eevee-sponsorblock-build
+          path: |
+            out/eevee/*.deb
+            out/eevee/EeveeSpotifyReincarnated-source.tar.gz
+            out/eevee/EeveeSpotifyReincarnated-LICENSE.txt
+            out/eevee/BUILD-INFO.txt
+          if-no-files-found: error
